@@ -1,6 +1,6 @@
 <template>
   <v-snackbar v-model="$parent.on" :timeout="doisSegundos">
-    {{ texto }}
+    {{ mensagem }}
 
     <template #action="{ attrs }">
       <v-btn :color="color" text v-bind="attrs" @click="$parent.on = false">
@@ -13,7 +13,7 @@
 <script>
 export default {
   name: "Notificacao",
-  props: ["on", "texto", "color"],
+  props: ["on", "mensagem", "color"],
   data: () => ({
     doisSegundos: 2000,
   }),

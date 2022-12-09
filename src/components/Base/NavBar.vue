@@ -2,7 +2,9 @@
   <v-navigation-drawer v-model="$parent.drawer" app>
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="text-h6"> Lista do Marcio </v-list-item-title>
+        <v-list-item-title class="text-h6">
+          Lista {{ user ? `de ${user.nome}` : "do Marcio" }}
+        </v-list-item-title>
         <v-list-item-subtitle> melhor não existe </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
@@ -29,14 +31,22 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   name: "NavBar",
+  created() {
+    console.log(this.user.nome);
+  },
   data: () => ({
     items: [
       { title: "Lista", icon: "mdi-list-box-outline", route: "/" },
       { title: "Sobre", icon: "mdi-help-box", route: "/about" },
     ],
   }),
+  computed: {
+    ...mapState("todo", ["user"]),
+  },
 };
 </script>
 

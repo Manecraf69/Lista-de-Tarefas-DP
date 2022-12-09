@@ -15,7 +15,7 @@
       </section>
     </v-list>
 
-    <Notificacao :texto="textoNotificacao" :color="color" />
+    <Notificacao :mensagem="mensagemNotificacao" :color="color" />
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
   name: "Home",
   components: { TarefaInput, TarefaItem, Notificacao },
   data: () => ({
-    textoNotificacao: "",
+    mensagemNotificacao: "",
     color: "",
     on: false,
   }),
@@ -40,7 +40,7 @@ export default {
     ...mapMutations("todo", ["adicionarTarefa", "excluirTarefa"]),
 
     chamarNotificaçoo(texto, cor) {
-      this.textoNotificacao = texto;
+      this.mensagemNotificacao = texto;
       this.color = cor;
       this.on = true;
     },
