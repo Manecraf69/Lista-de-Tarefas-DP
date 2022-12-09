@@ -32,6 +32,7 @@
 
     <v-app-bar
       app
+      dark
       color="teal"
       prominent
       src="@/assets/minecraft-wallpaper.jpeg"
