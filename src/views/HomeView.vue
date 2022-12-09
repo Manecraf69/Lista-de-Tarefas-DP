@@ -2,14 +2,25 @@
   <div class="home">
     <v-list class="pt-0" flat>
       <section v-for="tarefa in tarefas" :key="tarefa.id">
-        <v-list-item>
-          <template v-slot:default="{ active }">
+        <v-list-item
+          @click="tarefa.feita = !tarefa.feita"
+          :class="{ 'teal lighten-5': tarefa.feita }"
+        >
+          <template #default>
             <v-list-item-action>
-              <v-checkbox :input-value="active" color="primary"></v-checkbox>
+              <v-checkbox
+                :input-value="tarefa.feita"
+                color="primary"
+              ></v-checkbox>
             </v-list-item-action>
 
             <v-list-item-content>
-              <v-list-item-title>{{ tarefa.titulo }}</v-list-item-title>
+              <v-list-item-title
+                :class="{
+                  'text-decoration-line-through warning--text': tarefa.feita,
+                }"
+                >{{ tarefa.titulo }}</v-list-item-title
+              >
             </v-list-item-content>
           </template>
         </v-list-item>
