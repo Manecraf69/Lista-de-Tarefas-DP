@@ -22,6 +22,11 @@
                 >{{ tarefa.titulo }}</v-list-item-title
               >
             </v-list-item-content>
+            <v-list-item-action>
+              <v-btn @click.stop="excluirTarefa(tarefa)" icon>
+                <v-icon color="grey">mdi-delete</v-icon>
+              </v-btn>
+            </v-list-item-action>
           </template>
         </v-list-item>
         <v-divider></v-divider>
@@ -57,5 +62,10 @@ export default {
       },
     ],
   }),
+  methods: {
+    excluirTarefa({ id }) {
+      this.tarefas = this.tarefas.filter((tarefa) => tarefa.id !== id);
+    },
+  },
 };
 </script>
