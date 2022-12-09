@@ -1,7 +1,7 @@
 <template>
   <v-list-item
     @click="tarefa.feita = !tarefa.feita"
-    :class="$emit('finalizarTarefa', tarefa)"
+    :class="{ 'rounded primary': tarefa.feita }"
   >
     <template #default>
       <v-list-item-action>

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <InputTarefa @adicionarTarefa="criarTarefa" />
+    <TarefaInput @adicionarTarefa="criarTarefa" />
 
     <v-list color="transparent" class="pt-0" flat>
       <section align="center" class="mt-16 pt-16" v-if="!tarefas.length">
@@ -9,11 +9,7 @@
       </section>
 
       <section v-else v-for="tarefa in tarefas" :key="tarefa.id">
-        <ListarTarefas
-          @finalizarTarefa="verificarTema"
-          @apagarTarefa="deletarTarefa"
-          :tarefa="tarefa"
-        />
+        <TarefaItem @apagarTarefa="deletarTarefa" :tarefa="tarefa" />
 
         <v-divider></v-divider>
       </section>
@@ -25,13 +21,13 @@
 
 <script>
 import { mapMutations, mapState } from "vuex";
-import InputTarefa from "@/components/InputTarefa.vue";
-import ListarTarefas from "@/components/ListarTarefas.vue";
+import TarefaInput from "@/components/TarefaInput.vue";
+import TarefaItem from "@/components/TarefaItem.vue";
 import Notificacao from "@/components/Notificacao.vue";
 
 export default {
   name: "Home",
-  components: { InputTarefa, ListarTarefas, Notificacao },
+  components: { TarefaInput, TarefaItem, Notificacao },
   data: () => ({
     textoNotificacao: "",
     color: "",
@@ -47,15 +43,6 @@ export default {
       this.textoNotificacao = texto;
       this.color = cor;
       this.on = true;
-    },
-    verificarTema({ feita }) {
-      if (this.$vuetify.theme.dark && feita) {
-        return "rounded teal darken-4";
-      } else if (feita) {
-        return "rounded teal lighten-4";
-      } else {
-        return "rounded";
-      }
     },
     criarTarefa(tituloTarefa) {
       if (tituloTarefa === null) {
