@@ -13,12 +13,9 @@
       @click:append="criarTarefa()"
     ></v-text-field>
     <v-list class="pt-0" flat>
-      <section
-        class="d-flex justify-center flex-column mt-16"
-        v-if="!tarefas.length"
-      >
+      <section align="center" class="mt-16" v-if="!tarefas.length">
         <v-icon color="teal lighten-3" size="64px">mdi-playlist-check</v-icon>
-        <h1 class="text-center teal--text text--lighten-3">Não há tarefas</h1>
+        <h1 class="teal--text text--lighten-3">Não há tarefas</h1>
       </section>
       <section v-for="tarefa in tarefas" :key="tarefa.id">
         <v-list-item
