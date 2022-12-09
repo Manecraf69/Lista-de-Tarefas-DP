@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="about px-3 py-1">
     <h1 class="mb-3">Porque usar uma lista?</h1>
     <p>
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
