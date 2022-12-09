@@ -11,7 +11,7 @@ export const todo = {
         feita: false,
       });
     },
-    excluirTarefa(state, { id }) {
+    excluirTarefa(state, id) {
       state.tarefas = state.tarefas.filter((tarefa) => tarefa.id !== id);
     },
   },
