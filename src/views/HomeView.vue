@@ -1,5 +1,16 @@
 <template>
   <div class="home">
+    <v-text-field
+      outlined
+      clearable
+      class="pa-3"
+      hide-details
+      v-model="tituloTarefa"
+      append-icon="mdi-send"
+      label="Adicione uma tarefa"
+      @keyup.enter="adicionarTarefa()"
+      @click:append="adicionarTarefa()"
+    ></v-text-field>
     <v-list class="pt-0" flat>
       <section v-for="tarefa in tarefas" :key="tarefa.id">
         <v-list-item
@@ -32,6 +43,24 @@
         <v-divider></v-divider>
       </section>
     </v-list>
+    <v-snackbar v-model="adicionou" timeout="2000">
+      Tarefa adicionada!
+
+      <template #action="{ attrs }">
+        <v-btn color="teal" text v-bind="attrs" @click="adicionou = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
+    <v-snackbar v-model="erro" timeout="2000">
+      Escreva algo para adicionar uma terafa!
+
+      <template #action="{ attrs }">
+        <v-btn color="warning" text v-bind="attrs" @click="erro = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -39,30 +68,25 @@
 export default {
   name: "Home",
   data: () => ({
-    tarefas: [
-      {
-        id: 0,
-        titulo: "tarefa1",
-        feita: false,
-      },
-      {
-        id: 1,
-        titulo: "tarefa2",
-        feita: false,
-      },
-      {
-        id: 2,
-        titulo: "tarefa3",
-        feita: false,
-      },
-      {
-        id: 3,
-        titulo: "tarefa4",
-        feita: false,
-      },
-    ],
+    erro: false,
+    tarefas: [],
+    tituloTarefa: "",
+    adicionou: false,
   }),
   methods: {
+    adicionarTarefa() {
+      if (this.tituloTarefa.length) {
+        this.tarefas.push({
+          id: Date.now(),
+          titulo: this.tituloTarefa,
+          feita: false,
+        });
+        this.tituloTarefa = "";
+        this.adicionou = true;
+      } else {
+        this.erro = true;
+      }
+    },
     excluirTarefa({ id }) {
       this.tarefas = this.tarefas.filter((tarefa) => tarefa.id !== id);
     },
