@@ -4,12 +4,13 @@
       outlined
       clearable
       class="pa-3"
+      color="teal"
       hide-details
       v-model="tituloTarefa"
       append-icon="mdi-send"
       label="Adicione uma tarefa"
-      @keyup.enter="adicionarTarefa()"
-      @click:append="adicionarTarefa()"
+      @keyup.enter="criarTarefa()"
+      @click:append="criarTarefa()"
     ></v-text-field>
     <v-list class="pt-0" flat>
       <section v-for="tarefa in tarefas" :key="tarefa.id">
@@ -65,30 +66,28 @@
 </template>
 
 <script>
+import { mapMutations, mapState } from "vuex";
 export default {
   name: "Home",
   data: () => ({
-    erro: false,
-    tarefas: [],
     tituloTarefa: "",
     adicionou: false,
+    erro: false,
   }),
+  computed: {
+    ...mapState("todo", ["tarefas"]),
+  },
   methods: {
-    adicionarTarefa() {
+    ...mapMutations("todo", ["adicionarTarefa", "excluirTarefa"]),
+
+    criarTarefa() {
       if (this.tituloTarefa.length) {
-        this.tarefas.push({
-          id: Date.now(),
-          titulo: this.tituloTarefa,
-          feita: false,
-        });
+        this.adicionarTarefa(this.tituloTarefa);
         this.tituloTarefa = "";
         this.adicionou = true;
       } else {
         this.erro = true;
       }
-    },
-    excluirTarefa({ id }) {
-      this.tarefas = this.tarefas.filter((tarefa) => tarefa.id !== id);
     },
   },
 };

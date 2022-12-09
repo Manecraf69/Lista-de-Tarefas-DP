@@ -1,17 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
+import VuexPersistence from "vuex-persist";
 
-Vue.use(Vuex)
+import { todo } from "./todo";
+
+Vue.use(Vuex);
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage,
+  key: "todo-list",
+});
+
+const modules = {
+  todo,
+};
 
 export default new Vuex.Store({
-  state: {
-  },
-  getters: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
-  modules: {
-  }
-})
+  modules,
+  plugins: [vuexLocal.plugin],
+});
