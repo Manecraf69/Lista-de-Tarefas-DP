@@ -12,8 +12,15 @@
 
 <script>
 import AppBar from "@/components/Base/AppBar.vue";
+import { mapState } from "vuex";
 
 export default {
   components: { AppBar },
+  created() {
+    this.$vuetify.theme.dark = this.tema;
+  },
+  computed: {
+    ...mapState("todo", ["tema"]),
+  },
 };
 </script>

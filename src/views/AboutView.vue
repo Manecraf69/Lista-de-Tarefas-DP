@@ -52,12 +52,15 @@ import Notificacao from "@/components/Notificacao.vue";
 export default {
   name: "About",
   components: { Notificacao },
+  created() {
+    this.nomeUsuario = this.nome;
+  },
   data: () => ({
     nomeUsuario: "",
     on: false,
   }),
   computed: {
-    ...mapState("todo", ["user"]),
+    ...mapState("todo", ["nome"]),
   },
   methods: {
     ...mapMutations("todo", ["salvarUsuario"]),

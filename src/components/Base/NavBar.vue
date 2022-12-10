@@ -3,7 +3,7 @@
     <v-list-item>
       <v-list-item-content>
         <v-list-item-title class="text-h6">
-          Lista {{ user ? `de ${user.nome}` : "do Marcio" }}
+          Lista {{ nome.length ? `de ${nome}` : "do Marcio" }}
         </v-list-item-title>
         <v-list-item-subtitle> melhor não existe </v-list-item-subtitle>
       </v-list-item-content>
@@ -35,9 +35,6 @@ import { mapState } from "vuex";
 
 export default {
   name: "NavBar",
-  created() {
-    console.log(this.user.nome);
-  },
   data: () => ({
     items: [
       { title: "Lista", icon: "mdi-list-box-outline", route: "/" },
@@ -45,7 +42,7 @@ export default {
     ],
   }),
   computed: {
-    ...mapState("todo", ["user"]),
+    ...mapState("todo", ["nome"]),
   },
 };
 </script>

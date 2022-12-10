@@ -2,11 +2,15 @@ export const todo = {
   namespaced: true,
   state: () => ({
     tarefas: [],
-    user: {},
+    tema: false,
+    nome: "",
   }),
   mutations: {
+    salvarTema(state, novoTema) {
+      state.tema = novoTema;
+    },
     salvarUsuario(state, novoNome) {
-      state.user.nome = novoNome;
+      state.nome = novoNome;
     },
     adicionarTarefa(state, tituloTarefa) {
       state.tarefas.push({

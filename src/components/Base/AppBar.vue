@@ -20,7 +20,7 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+      <v-btn icon @click="trocarTema()">
         <v-icon>mdi-brightness-6</v-icon>
       </v-btn>
     </v-app-bar>
@@ -31,6 +31,7 @@
 
 <script>
 import NavBar from "@/components/Base/NavBar.vue";
+import { mapMutations } from "vuex";
 
 export default {
   name: "AppBar",
@@ -38,7 +39,19 @@ export default {
   data: () => ({
     drawer: null,
   }),
+  methods: {
+    ...mapMutations("todo", ["salvarTema"]),
+
+    trocarTema() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.salvarTema(this.$vuetify.theme.dark);
+    },
+  },
 };
 </script>
 
-<style></style>
+<style>
+.v-app-bar-title__content {
+  width: 200px !important;
+}
+</style>
